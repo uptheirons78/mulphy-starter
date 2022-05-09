@@ -10,6 +10,10 @@
  * @package MulphyStarter
  */
 
+if (!defined('ABSPATH')) {
+  exit; // Exit if accessed directly
+}
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -25,7 +29,10 @@
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
   <div id="page" class="site">
+    <!-- Accessibility: Skip to main content -->
     <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'mulphy-starter'); ?></a>
-
+    <!-- Header with main navigation -->
+    <?php get_template_part('template-parts/headers/header', 'basic'); ?>
+    <!-- End: Header with main navigation -->
+    <!-- Main content -->
     <main id="main" role="main" tabindex="-1">
-      <h1><?php bloginfo( 'name' ); ?></h1>

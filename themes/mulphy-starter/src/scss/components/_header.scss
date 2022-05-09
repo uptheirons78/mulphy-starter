@@ -1,0 +1,29 @@
+.header-basic {
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba($clr-primary, 0.2);
+  }
+
+  &__logo-container {
+    a {
+
+      h2 {
+        font-weight: 900;
+      }
+    }
+  }
+
+  &__nav-container {
+    ul {
+      list-style-type: none;
+      li {
+        a {
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+}

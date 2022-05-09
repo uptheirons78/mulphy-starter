@@ -1,4 +1,29 @@
 body {
   font-family: $ff-basic;
   font-weight: 400;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $ff-heading;
+  font-weight: 700;
+}
+
+p {
+  color: rgba($clr-black, 0.8);
+}
+
+a {
+  text-decoration: none;
+  color: $clr-primary;
+  transition: color .3s ease-out;
+
+  &:hover {
+    color: $clr-green;
+  }
 }

@@ -6,3 +6,7 @@
 @import './base/utilities';
 @import './base/grid';
 @import './base/global';
+
+/* Components */
+@import './components/header.scss';
+@import './components/footer.scss';

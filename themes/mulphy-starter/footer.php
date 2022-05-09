@@ -11,7 +11,11 @@
  */
 
 ?>
-        <p>greetings from the footer.</p>
+        <footer id="site-footer" class="site-footer">
+          <div class="container">
+            <p>Copyright &copy <?php echo date('Y'); ?> Mulphy.com</p>
+          </div>
+        </footer>
       </main><!-- #main -->
     </div><!-- #page -->
 
