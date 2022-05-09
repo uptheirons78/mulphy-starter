@@ -1,0 +1,23 @@
+{
+  "name": "mulphy-starter",
+  "version": "1.0.0",
+  "description": "Hi. I'm a starter theme called Mulphy Starter",
+  "author": "Mauro",
+  "license": "MIT",
+  "keywords": [
+    "WordPress",
+    "Theme"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@wordpress/scripts": "*",
+    "browser-sync": "*",
+    "npm-run-all": "*"
+  },
+  "scripts": {
+    "dev": "npm-run-all --parallel sync start",
+    "sync": "browser-sync start -p 'starter.local' --files '**/*.php' 'build/*.js' 'build/*.css'",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  }
+}
