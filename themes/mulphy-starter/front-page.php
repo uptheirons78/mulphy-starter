@@ -35,9 +35,16 @@ get_header();
     <?php if ($homePosts->have_posts()) : ?>
       <?php while ($homePosts->have_posts()) : ?>
         <?php $homePosts->the_post(); ?>
+        <?php
+        if (has_excerpt()) {
+          $postExcerpt = get_the_excerpt() . ' [...]';
+        } else {
+          $postExcerpt = wp_trim_words(get_the_content(), 23, ' [...]');
+        }
+        ?>
         <article class="py-1">
           <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-          <p><?php echo wp_trim_words(get_the_content(), 23); ?> <a href="<?php the_permalink(); ?>">read more</a></p>
+          <p><?php echo $postExcerpt ?> <a href="<?php the_permalink(); ?>">read more</a></p>
         </article>
       <?php endwhile; ?>
     <?php endif; ?>
@@ -48,8 +55,41 @@ get_header();
     ?>
     <?php wp_reset_postdata(); ?>
     <div class="py-1">
-      <a href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>">See all posts.</a>
+      <a href="<?php echo get_permalink(get_option('page_for_posts')); ?>">See all posts.</a>
     </div>
+  </div>
+</section>
+<section class="home-events py-2">
+  <div class="container">
+    <?php
+    /**
+     * this is how to run a simple custom query for events
+     *
+     * @link https://developer.wordpress.org/reference/classes/wp_query/
+     */
+    $homeEvents = new WP_Query(array(
+      'post_type' => 'event',
+      'posts_per_page' => 2
+    ));
+    ?>
+    <?php if ($homeEvents->have_posts()) : ?>
+      <h2 class="uppercase font-md">example of a custom query for events.</h2>
+      <?php while ($homeEvents->have_posts()) : ?>
+        <?php $homeEvents->the_post(); ?>
+        <?php
+          if (has_excerpt()) {
+            $eventExcerpt = get_the_excerpt() . ' [...]';
+          } else {
+            $eventExcerpt = wp_trim_words(get_the_content(), 23, ' [...]');
+          }
+        ?>
+        <article class="py-1">
+          <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+          <p><?php echo $eventExcerpt; ?> <a href="<?php the_permalink(); ?>">read more</a></p>
+        </article>
+      <?php endwhile; ?>
+    <?php endif; ?>
+    <?php wp_reset_postdata(); ?>
   </div>
 </section>
 
