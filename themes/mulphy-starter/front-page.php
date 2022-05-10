@@ -67,9 +67,21 @@ get_header();
      *
      * @link https://developer.wordpress.org/reference/classes/wp_query/
      */
+    $today = date('Ymd');
     $homeEvents = new WP_Query(array(
       'post_type' => 'event',
-      'posts_per_page' => 2
+      'posts_per_page' => 2,
+      'meta_key' => 'event_date', //meta key to use for ordering
+      'orderby' => 'meta_value_num', //ordering by a custom field (meta value)
+      'order' => 'ASC', //type of ordering
+      'meta_query' => array( // only show events in the future
+        array(
+          'key'       => 'event_date',
+          'compare'   => '>=',
+          'value'     => $today,
+          'type'      => 'numeric'
+        ),
+      ),
     ));
     ?>
     <?php if ($homeEvents->have_posts()) : ?>
@@ -77,14 +89,20 @@ get_header();
       <?php while ($homeEvents->have_posts()) : ?>
         <?php $homeEvents->the_post(); ?>
         <?php
-          if (has_excerpt()) {
-            $eventExcerpt = get_the_excerpt() . ' [...]';
-          } else {
-            $eventExcerpt = wp_trim_words(get_the_content(), 23, ' [...]');
-          }
+        if (has_excerpt()) {
+          $eventExcerpt = get_the_excerpt() . ' [...]';
+        } else {
+          $eventExcerpt = wp_trim_words(get_the_content(), 23, ' [...]');
+        }
         ?>
         <article class="py-1">
           <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+          <?php $eventDate = new DateTime( get_field( 'event_date' ) ); ?>
+          <small>Event Date:
+            <span><?php echo $eventDate->format('d'); ?> </span>
+            <span><?php echo $eventDate->format('M'); ?> </span>
+            <span><?php echo $eventDate->format('Y'); ?></span>
+          </small>
           <p><?php echo $eventExcerpt; ?> <a href="<?php the_permalink(); ?>">read more</a></p>
         </article>
       <?php endwhile; ?>
