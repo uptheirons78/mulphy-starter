@@ -19,11 +19,19 @@
   &__nav-container {
     ul {
       list-style-type: none;
+      display: flex;
       li {
+        padding-left: 1rem;
         a {
           letter-spacing: 1px;
         }
       }
+    }
+  }
+
+  .current_page_item {
+    a {
+      color: $clr-red;
     }
   }
 }
