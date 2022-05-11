@@ -47,6 +47,9 @@ get_header();
           <p><?php echo $postExcerpt ?> <a href="<?php the_permalink(); ?>">read more</a></p>
         </article>
       <?php endwhile; ?>
+      <div class="py-1">
+        <a href="<?php echo get_permalink(get_option('page_for_posts')); ?>">See all posts.</a>
+      </div>
     <?php endif; ?>
     <?php
     /**
@@ -54,9 +57,6 @@ get_header();
      */
     ?>
     <?php wp_reset_postdata(); ?>
-    <div class="py-1">
-      <a href="<?php echo get_permalink(get_option('page_for_posts')); ?>">See all posts.</a>
-    </div>
   </div>
 </section>
 <section class="home-events py-2">
@@ -97,7 +97,7 @@ get_header();
         ?>
         <article class="py-1">
           <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-          <?php $eventDate = new DateTime( get_field( 'event_date' ) ); ?>
+          <?php $eventDate = new DateTime(get_field('event_date')); ?>
           <small>Event Date:
             <span><?php echo $eventDate->format('d'); ?> </span>
             <span><?php echo $eventDate->format('M'); ?> </span>
@@ -106,6 +106,9 @@ get_header();
           <p><?php echo $eventExcerpt; ?> <a href="<?php the_permalink(); ?>">read more</a></p>
         </article>
       <?php endwhile; ?>
+      <div class="py-1">
+        <a href="<?php echo get_post_type_archive_link( 'event' ); ?>">See all our events.</a>
+      </div>
     <?php endif; ?>
     <?php wp_reset_postdata(); ?>
   </div>

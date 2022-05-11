@@ -2,9 +2,9 @@
 /**
  * Mulphy Starter Theme: Event Post Type
  */
-add_action('init', 'mulphy_starter_post_types');
+add_action('init', 'mulphy_starter_event_post_type');
 
-function mulphy_starter_post_types()
+function mulphy_starter_event_post_type()
 {
   $args = [
     'label'  => esc_html__('Events', 'text-domain'),
